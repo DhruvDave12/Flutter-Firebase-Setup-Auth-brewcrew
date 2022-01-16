@@ -1,4 +1,4 @@
-# brew_crew
+# Flutter Firebase Project (Brew-Crew)
 
 A new Flutter project.
 
