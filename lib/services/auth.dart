@@ -31,6 +31,20 @@ class AuthService {
   }
 
   // sign in with email and password
+  Future signinWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      User? regUser = result.user;
+      // this will return according to our user model. only uid....
+      return _userFromFirebaseUser(regUser);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
 
   // register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
