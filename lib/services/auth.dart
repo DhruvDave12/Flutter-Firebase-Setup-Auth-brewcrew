@@ -1,4 +1,5 @@
 import 'package:brew_crew/models/user.dart';
+import 'package:brew_crew/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 // create a class for auth
@@ -45,7 +46,6 @@ class AuthService {
     }
   }
 
-
   // register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
@@ -54,6 +54,9 @@ class AuthService {
 
       User? regUser = result.user;
       // this will return according to our user model. only uid....
+
+      // we are gonna create a document of this particular user in a collection
+      await DatabaseService(uid: regUser!.uid).updateUserData('0', 'new crew member', 100);
       return _userFromFirebaseUser(regUser);
     } catch (e) {
       print(e.toString());
